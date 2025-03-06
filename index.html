@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quran Viewer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.8.4/tingle.min.js" integrity="sha512-SxopZNPB/jzFpgtGdR6lI7dK8EbbheOZVLNDI0FsMNM0NAqNkJyVoT83C72esOJCTdPVfDb8miZ3whsW4o/+fA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.8.4/tingle.min.css">
     <style>
         * {
             margin: 0;
@@ -93,6 +95,20 @@
             font-size: 20px;
             color: #333;
         }
+
+        .tingle-modal-box {
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .tingle-modal-box__content {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .tingle-btn {
+            padding: 10px 20px;
+        }
     </style>
 </head>
 <body>
@@ -139,6 +155,37 @@
             }
         }
 
+        function createModal() {
+            const modal = new tingle.modal({
+                footer: true,
+                stickyFooter: false,
+                closeMethods: ['overlay', 'button', 'escape'],
+                closeLabel: "Close"
+            });
+
+            modal.setContent(`
+                <h2>Go to Page</h2>
+                <input type="number" id="pageInput" min="1" max="${totalPages}"
+                       style="width: 100%; padding: 10px; margin: 20px 0; font-size: 16px;">
+            `);
+
+            modal.addFooterBtn('Go', 'tingle-btn tingle-btn--primary', function() {
+                const pageInput = document.getElementById('pageInput');
+                const pageNumber = parseInt(pageInput.value);
+                if (pageNumber >= 1 && pageNumber <= totalPages) {
+                    const slideIndex = totalPages - pageNumber;
+                    slider.goTo(slideIndex);
+                    modal.close();
+                }
+            });
+
+            modal.addFooterBtn('Cancel', 'tingle-btn tingle-btn--default', function() {
+                modal.close();
+            });
+
+            return modal;
+        }
+
         function init() {
             generateSlides();
 
@@ -158,6 +205,13 @@
                 preventScrollOnTouch: 'auto',
                 axis: "horizontal",
                 dir: "rtl"
+            });
+
+            const modal = createModal();
+            pageInfo.style.cursor = 'pointer';
+            pageInfo.addEventListener('click', () => {
+                modal.open();
+                document.getElementById('pageInput').value = totalPages - currentSlide;
             });
 
             function updatePageInfo(index) {
@@ -213,6 +267,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', init);
+    </script>
+    <script>
+
     </script>
 </body>
 </html>
