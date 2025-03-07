@@ -74,6 +74,11 @@
       display: flex;
       align-items: center;
       font-size: 16px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 5px;
+      background-color: #f6f6f6;
+      color: #333;
     }
 
     .juzz-info {
@@ -84,7 +89,9 @@
 
     .surah-info {
       display: flex;
+      justify-content: center;
       align-items: center;
+      flex-direction: row-reverse;
       font-size: 12px;
     }
 
@@ -140,7 +147,7 @@
     <div class="navigation">
       <button class="nav-button" id="prevButton">Next</button>
       <div class="surah-info" id="surahInfo">-</div>
-      <div class="page-info" id="pageInfo">Page 1 / 604</div>
+      <div class="page-info" id="pageInfo">1</div>
       <div class="juzz-info" id="juzzInfo">Juzz 1</div>
       <button class="nav-button" id="nextButton">Prev</button>
     </div>
@@ -260,121 +267,121 @@
       ]
 
       const surahList = [
-  { name: 'Al-Fatihah', startPage: 1, endPage: 1 },
-  { name: 'Al-Baqarah', startPage: 2, endPage: 49 },
-  { name: 'Al-Imran', startPage: 50, endPage: 76 },
-  { name: 'An-Nisa', startPage: 77, endPage: 106 },
-  { name: 'Al-Maidah', startPage: 106, endPage: 127 },
-  { name: 'Al-Anam', startPage: 128, endPage: 150 },
-  { name: 'Al-Araf', startPage: 151, endPage: 176 },
-  { name: 'Al-Anfal', startPage: 177, endPage: 186 },
-  { name: 'At-Tawbah', startPage: 187, endPage: 207 },
-  { name: 'Yunus', startPage: 208, endPage: 221 },
-  { name: 'Hud', startPage: 221, endPage: 235 },
-  { name: 'Yusuf', startPage: 235, endPage: 248 },
-  { name: 'Ar-Rad', startPage: 249, endPage: 255 },
-  { name: 'Ibrahim', startPage: 255, endPage: 261 },
-  { name: 'Al-Hijr', startPage: 262, endPage: 267 },
-  { name: 'An-Nahl', startPage: 267, endPage: 281 },
-  { name: 'Al-Isra', startPage: 282, endPage: 293 },
-  { name: 'Al-Kahf', startPage: 293, endPage: 304 },
-  { name: 'Maryam', startPage: 305, endPage: 312 },
-  { name: 'Ta-Ha', startPage: 312, endPage: 321 },
-  { name: 'Al-Anbiya', startPage: 322, endPage: 331 },
-  { name: 'Al-Hajj', startPage: 332, endPage: 341 },
-  { name: 'Al-Muminun', startPage: 342, endPage: 349 },
-  { name: 'An-Nur', startPage: 350, endPage: 359 },
-  { name: 'Al-Furqan', startPage: 359, endPage: 366 },
-  { name: 'Ash-Shuara', startPage: 367, endPage: 376 },
-  { name: 'An-Naml', startPage: 377, endPage: 385 },
-  { name: 'Al-Qasas', startPage: 385, endPage: 396 },
-  { name: 'Al-Ankabut', startPage: 396, endPage: 404 },
-  { name: 'Ar-Rum', startPage: 404, endPage: 410 },
-  { name: 'Luqman', startPage: 411, endPage: 414 },
-  { name: 'As-Sajdah', startPage: 415, endPage: 417 },
-  { name: 'Al-Ahzab', startPage: 418, endPage: 427 },
-  { name: 'Saba', startPage: 428, endPage: 434 },
-  { name: 'Fatir', startPage: 434, endPage: 440 },
-  { name: 'Ya-Sin', startPage: 440, endPage: 445 },
-  { name: 'As-Saffat', startPage: 446, endPage: 452 },
-  { name: 'Sad', startPage: 453, endPage: 458 },
-  { name: 'Az-Zumar', startPage: 458, endPage: 467 },
-  { name: 'Ghafir', startPage: 467, endPage: 476 },
-  { name: 'Fussilat', startPage: 477, endPage: 482 },
-  { name: 'Ash-Shura', startPage: 483, endPage: 489 },
-  { name: 'Az-Zukhruf', startPage: 489, endPage: 495 },
-  { name: 'Ad-Dukhan', startPage: 496, endPage: 498 },
-  { name: 'Al-Jathiyah', startPage: 499, endPage: 502 },
-  { name: 'Al-Ahqaf', startPage: 502, endPage: 506 },
-  { name: 'Muhammad', startPage: 507, endPage: 510 },
-  { name: 'Al-Fath', startPage: 511, endPage: 515 },
-  { name: 'Al-Hujurat', startPage: 515, endPage: 517 },
-  { name: 'Qaf', startPage: 518, endPage: 520 },
-  { name: 'Adh-Dhariyat', startPage: 520, endPage: 523 },
-  { name: 'At-Tur', startPage: 523, endPage: 525 },
-  { name: 'An-Najm', startPage: 526, endPage: 528 },
-  { name: 'Al-Qamar', startPage: 528, endPage: 531 },
-  { name: 'Ar-Rahman', startPage: 531, endPage: 534 },
-  { name: 'Al-Waqiah', startPage: 534, endPage: 537 },
-  { name: 'Al-Hadid', startPage: 537, endPage: 541 },
-  { name: 'Al-Mujadila', startPage: 542, endPage: 545 },
-  { name: 'Al-Hashr', startPage: 545, endPage: 548 },
-  { name: 'Al-Mumtahinah', startPage: 549, endPage: 551 },
-  { name: 'As-Saff', startPage: 551, endPage: 552 },
-  { name: 'Al-Jumuah', startPage: 553, endPage: 554 },
-  { name: 'Al-Munafiqun', startPage: 554, endPage: 555 },
-  { name: 'At-Taghabun', startPage: 556, endPage: 557 },
-  { name: 'At-Talaq', startPage: 558, endPage: 559 },
-  { name: 'At-Tahrim', startPage: 560, endPage: 561 },
-  { name: 'Al-Mulk', startPage: 562, endPage: 564 },
-  { name: 'Al-Qalam', startPage: 564, endPage: 566 },
-  { name: 'Al-Haqqah', startPage: 566, endPage: 568 },
-  { name: 'Al-Maarij', startPage: 568, endPage: 570 },
-  { name: 'Nuh', startPage: 570, endPage: 571 },
-  { name: 'Al-Jinn', startPage: 572, endPage: 573 },
-  { name: 'Al-Muzzammil', startPage: 574, endPage: 575 },
-  { name: 'Al-Muddathir', startPage: 575, endPage: 577 },
-  { name: 'Al-Qiyamah', startPage: 577, endPage: 578 },
-  { name: 'Al-Insan', startPage: 578, endPage: 580 },
-  { name: 'Al-Mursalat', startPage: 580, endPage: 581 },
-  { name: 'An-Naba', startPage: 582, endPage: 583 },
-  { name: 'An-Naziat', startPage: 583, endPage: 584 },
-  { name: 'Abasa', startPage: 585, endPage: 586 },
-  { name: 'At-Takwir', startPage: 586, endPage: 586 },
-  { name: 'Al-Infitar', startPage: 587, endPage: 587 },
-  { name: 'Al-Mutaffifin', startPage: 587, endPage: 589 },
-  { name: 'Al-Inshiqaq', startPage: 589, endPage: 590 },
-  { name: 'Al-Buruj', startPage: 590, endPage: 590 },
-  { name: 'At-Tariq', startPage: 591, endPage: 591 },
-  { name: 'Al-Ala', startPage: 591, endPage: 592 },
-  { name: 'Al-Ghashiyah', startPage: 592, endPage: 593 },
-  { name: 'Al-Fajr', startPage: 593, endPage: 594 },
-  { name: 'Al-Balad', startPage: 594, endPage: 595 },
-  { name: 'Ash-Shams', startPage: 595, endPage: 595 },
-  { name: 'Al-Lail', startPage: 595, endPage: 596 },
-  { name: 'Ad-Duha', startPage: 596, endPage: 596 },
-  { name: 'Ash-Sharh', startPage: 596, endPage: 597 },
-  { name: 'At-Tin', startPage: 597, endPage: 597 },
-  { name: 'Al-Alaq', startPage: 597, endPage: 598 },
-  { name: 'Al-Qadr', startPage: 598, endPage: 598 },
-  { name: 'Al-Bayyinah', startPage: 598, endPage: 599 },
-  { name: 'Az-Zalzalah', startPage: 599, endPage: 599 },
-  { name: 'Al-Adiyat', startPage: 599, endPage: 600 },
-  { name: 'Al-Qariah', startPage: 600, endPage: 600 },
-  { name: 'At-Takathur', startPage: 600, endPage: 600 },
-  { name: 'Al-Asr', startPage: 601, endPage: 601 },
-  { name: 'Al-Humazah', startPage: 601, endPage: 601 },
-  { name: 'Al-Fil', startPage: 601, endPage: 601 },
-  { name: 'Quraish', startPage: 602, endPage: 602 },
-  { name: 'Al-Maun', startPage: 602, endPage: 602 },
-  { name: 'Al-Kawthar', startPage: 602, endPage: 602 },
-  { name: 'Al-Kafirun', startPage: 603, endPage: 603 },
-  { name: 'An-Nasr', startPage: 603, endPage: 603 },
-  { name: 'Al-Masad', startPage: 603, endPage: 603 },
-  { name: 'Al-Ikhlas', startPage: 604, endPage: 604 },
-  { name: 'Al-Falaq', startPage: 604, endPage: 604 },
-  { name: 'An-Nas', startPage: 604, endPage: 604 }
-];
+        { name: 'Al-Fatihah', startPage: 1, endPage: 1 },
+        { name: 'Al-Baqarah', startPage: 2, endPage: 49 },
+        { name: 'Al-Imran', startPage: 50, endPage: 76 },
+        { name: 'An-Nisa', startPage: 77, endPage: 106 },
+        { name: 'Al-Maidah', startPage: 106, endPage: 127 },
+        { name: 'Al-Anam', startPage: 128, endPage: 150 },
+        { name: 'Al-Araf', startPage: 151, endPage: 176 },
+        { name: 'Al-Anfal', startPage: 177, endPage: 186 },
+        { name: 'At-Tawbah', startPage: 187, endPage: 207 },
+        { name: 'Yunus', startPage: 208, endPage: 221 },
+        { name: 'Hud', startPage: 221, endPage: 235 },
+        { name: 'Yusuf', startPage: 235, endPage: 248 },
+        { name: 'Ar-Rad', startPage: 249, endPage: 255 },
+        { name: 'Ibrahim', startPage: 255, endPage: 261 },
+        { name: 'Al-Hijr', startPage: 262, endPage: 267 },
+        { name: 'An-Nahl', startPage: 267, endPage: 281 },
+        { name: 'Al-Isra', startPage: 282, endPage: 293 },
+        { name: 'Al-Kahf', startPage: 293, endPage: 304 },
+        { name: 'Maryam', startPage: 305, endPage: 312 },
+        { name: 'Ta-Ha', startPage: 312, endPage: 321 },
+        { name: 'Al-Anbiya', startPage: 322, endPage: 331 },
+        { name: 'Al-Hajj', startPage: 332, endPage: 341 },
+        { name: 'Al-Muminun', startPage: 342, endPage: 349 },
+        { name: 'An-Nur', startPage: 350, endPage: 359 },
+        { name: 'Al-Furqan', startPage: 359, endPage: 366 },
+        { name: 'Ash-Shuara', startPage: 367, endPage: 376 },
+        { name: 'An-Naml', startPage: 377, endPage: 385 },
+        { name: 'Al-Qasas', startPage: 385, endPage: 396 },
+        { name: 'Al-Ankabut', startPage: 396, endPage: 404 },
+        { name: 'Ar-Rum', startPage: 404, endPage: 410 },
+        { name: 'Luqman', startPage: 411, endPage: 414 },
+        { name: 'As-Sajdah', startPage: 415, endPage: 417 },
+        { name: 'Al-Ahzab', startPage: 418, endPage: 427 },
+        { name: 'Saba', startPage: 428, endPage: 434 },
+        { name: 'Fatir', startPage: 434, endPage: 440 },
+        { name: 'Ya-Sin', startPage: 440, endPage: 445 },
+        { name: 'As-Saffat', startPage: 446, endPage: 452 },
+        { name: 'Sad', startPage: 453, endPage: 458 },
+        { name: 'Az-Zumar', startPage: 458, endPage: 467 },
+        { name: 'Ghafir', startPage: 467, endPage: 476 },
+        { name: 'Fussilat', startPage: 477, endPage: 482 },
+        { name: 'Ash-Shura', startPage: 483, endPage: 489 },
+        { name: 'Az-Zukhruf', startPage: 489, endPage: 495 },
+        { name: 'Ad-Dukhan', startPage: 496, endPage: 498 },
+        { name: 'Al-Jathiyah', startPage: 499, endPage: 502 },
+        { name: 'Al-Ahqaf', startPage: 502, endPage: 506 },
+        { name: 'Muhammad', startPage: 507, endPage: 510 },
+        { name: 'Al-Fath', startPage: 511, endPage: 515 },
+        { name: 'Al-Hujurat', startPage: 515, endPage: 517 },
+        { name: 'Qaf', startPage: 518, endPage: 520 },
+        { name: 'Adh-Dhariyat', startPage: 520, endPage: 523 },
+        { name: 'At-Tur', startPage: 523, endPage: 525 },
+        { name: 'An-Najm', startPage: 526, endPage: 528 },
+        { name: 'Al-Qamar', startPage: 528, endPage: 531 },
+        { name: 'Ar-Rahman', startPage: 531, endPage: 534 },
+        { name: 'Al-Waqiah', startPage: 534, endPage: 537 },
+        { name: 'Al-Hadid', startPage: 537, endPage: 541 },
+        { name: 'Al-Mujadila', startPage: 542, endPage: 545 },
+        { name: 'Al-Hashr', startPage: 545, endPage: 548 },
+        { name: 'Al-Mumtahinah', startPage: 549, endPage: 551 },
+        { name: 'As-Saff', startPage: 551, endPage: 552 },
+        { name: 'Al-Jumuah', startPage: 553, endPage: 554 },
+        { name: 'Al-Munafiqun', startPage: 554, endPage: 555 },
+        { name: 'At-Taghabun', startPage: 556, endPage: 557 },
+        { name: 'At-Talaq', startPage: 558, endPage: 559 },
+        { name: 'At-Tahrim', startPage: 560, endPage: 561 },
+        { name: 'Al-Mulk', startPage: 562, endPage: 564 },
+        { name: 'Al-Qalam', startPage: 564, endPage: 566 },
+        { name: 'Al-Haqqah', startPage: 566, endPage: 568 },
+        { name: 'Al-Maarij', startPage: 568, endPage: 570 },
+        { name: 'Nuh', startPage: 570, endPage: 571 },
+        { name: 'Al-Jinn', startPage: 572, endPage: 573 },
+        { name: 'Al-Muzzammil', startPage: 574, endPage: 575 },
+        { name: 'Al-Muddathir', startPage: 575, endPage: 577 },
+        { name: 'Al-Qiyamah', startPage: 577, endPage: 578 },
+        { name: 'Al-Insan', startPage: 578, endPage: 580 },
+        { name: 'Al-Mursalat', startPage: 580, endPage: 581 },
+        { name: 'An-Naba', startPage: 582, endPage: 583 },
+        { name: 'An-Naziat', startPage: 583, endPage: 584 },
+        { name: 'Abasa', startPage: 585, endPage: 586 },
+        { name: 'At-Takwir', startPage: 586, endPage: 586 },
+        { name: 'Al-Infitar', startPage: 587, endPage: 587 },
+        { name: 'Al-Mutaffifin', startPage: 587, endPage: 589 },
+        { name: 'Al-Inshiqaq', startPage: 589, endPage: 590 },
+        { name: 'Al-Buruj', startPage: 590, endPage: 590 },
+        { name: 'At-Tariq', startPage: 591, endPage: 591 },
+        { name: 'Al-Ala', startPage: 591, endPage: 592 },
+        { name: 'Al-Ghashiyah', startPage: 592, endPage: 593 },
+        { name: 'Al-Fajr', startPage: 593, endPage: 594 },
+        { name: 'Al-Balad', startPage: 594, endPage: 595 },
+        { name: 'Ash-Shams', startPage: 595, endPage: 595 },
+        { name: 'Al-Lail', startPage: 595, endPage: 596 },
+        { name: 'Ad-Duha', startPage: 596, endPage: 596 },
+        { name: 'Ash-Sharh', startPage: 596, endPage: 597 },
+        { name: 'At-Tin', startPage: 597, endPage: 597 },
+        { name: 'Al-Alaq', startPage: 597, endPage: 598 },
+        { name: 'Al-Qadr', startPage: 598, endPage: 598 },
+        { name: 'Al-Bayyinah', startPage: 598, endPage: 599 },
+        { name: 'Az-Zalzalah', startPage: 599, endPage: 599 },
+        { name: 'Al-Adiyat', startPage: 599, endPage: 600 },
+        { name: 'Al-Qariah', startPage: 600, endPage: 600 },
+        { name: 'At-Takathur', startPage: 600, endPage: 600 },
+        { name: 'Al-Asr', startPage: 601, endPage: 601 },
+        { name: 'Al-Humazah', startPage: 601, endPage: 601 },
+        { name: 'Al-Fil', startPage: 601, endPage: 601 },
+        { name: 'Quraish', startPage: 602, endPage: 602 },
+        { name: 'Al-Maun', startPage: 602, endPage: 602 },
+        { name: 'Al-Kawthar', startPage: 602, endPage: 602 },
+        { name: 'Al-Kafirun', startPage: 603, endPage: 603 },
+        { name: 'An-Nasr', startPage: 603, endPage: 603 },
+        { name: 'Al-Masad', startPage: 603, endPage: 603 },
+        { name: 'Al-Ikhlas', startPage: 604, endPage: 604 },
+        { name: 'Al-Falaq', startPage: 604, endPage: 604 },
+        { name: 'An-Nas', startPage: 604, endPage: 604 }
+      ];
 
       function createJuzzModal() {
         const modal = new tingle.modal({
@@ -465,11 +472,11 @@
 
       function updatePageInfo(index) {
         const pageNumber = totalPages - index;
-        pageInfo.textContent = `Page ${pageNumber} / ${totalPages}`;
+        pageInfo.textContent = `${pageNumber}`;
         juzzInfo.textContent = `Juzz ${JuzzList.find(juzz => juzz.startPage <= pageNumber && juzz.endPage >= pageNumber).value}`;
-        surahInfo.textContent = `${surahList
-  .filter(surah => surah.startPage <= pageNumber && surah.endPage >= pageNumber)
-  .map(surah => surah.name).reverse().join('\n')}`;
+        surahInfo.innerHTML = `<ul>${surahList
+          .filter(surah => surah.startPage <= pageNumber && surah.endPage >= pageNumber)
+          .map(surah => `<div>${surah.name}</div>`).join('')}`;
         localStorage.setItem('quranCurrentPage', pageNumber);
 
         [-2, -1, 0, 1, 2].forEach(offset => {
