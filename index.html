@@ -528,9 +528,21 @@
 
     document.addEventListener('DOMContentLoaded', init);
   </script>
-  <script>
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyC8VmCfLNiCGjRtLYpCWCe-iKvAdVs8g8Q",
+    authDomain: "diisi-00.firebaseapp.com",
+    projectId: "diisi-00",
+    storageBucket: "diisi-00.firebasestorage.app",
+    messagingSenderId: "72090764270",
+    appId: "1:72090764270:web:93ed4c8620f9e61bfb44ff",
+    measurementId: "G-R1KC7CGBJD"
+  };
 
-  </script>
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 </body>
-
 </html>
