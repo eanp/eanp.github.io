@@ -1,0 +1,64 @@
+name: Terraform
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  plan-apply:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      id-token: write
+      pull-requests: write
+
+    env:
+      # Secrets
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      # Vars (opsional—bisa juga hardcode di variables.tf)
+      GITHUB_OWNER: ${{ vars.GH_OWNER }}
+      CLOUDFLARE_ZONE_NAME: ${{ vars.CLOUDFLARE_ZONE_NAME }}
+      REPO_NAME: ${{ vars.REPO_NAME }}
+      CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
+      PAGES_BRANCH: ${{ vars.PAGES_BRANCH }}
+      CLOUDFLARE_PROXIED: ${{ vars.CLOUDFLARE_PROXIED }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        working-directory: ./terraform
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: ./terraform
+        run: |
+          terraform plan \
+            -var "github_owner=${GITHUB_OWNER}" \
+            -var "cloudflare_zone_name=${CLOUDFLARE_ZONE_NAME}" \
+            -var "repo_name=${REPO_NAME}" \
+            -var "custom_domain=${CUSTOM_DOMAIN}" \
+            -var "cname_target=${REPO_NAME}" \
+            -var "pages_branch=${PAGES_BRANCH}" \
+            -var "cloudflare_proxied=${CLOUDFLARE_PROXIED}"
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        working-directory: ./terraform
+        run: |
+          terraform apply -auto-approve \
+            -var "github_owner=${GITHUB_OWNER}" \
+            -var "cloudflare_zone_name=${CLOUDFLARE_ZONE_NAME}" \
+            -var "repo_name=${REPO_NAME}" \
+            -var "custom_domain=${CUSTOM_DOMAIN}" \
+            -var "cname_target=${REPO_NAME}" \
+            -var "pages_branch=${PAGES_BRANCH}" \
+            -var "cloudflare_proxied=${CLOUDFLARE_PROXIED}"
