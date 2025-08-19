@@ -154,7 +154,7 @@
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.min.js"></script>
   <script>
     const totalPages = 604;
     let currentSlide = 0;
@@ -475,7 +475,7 @@
         const pageNumber = totalPages - index;
         pageInfo.textContent = `${pageNumber}`;
         juzzInfo.textContent = `Juzz ${JuzzList.find(juzz => juzz.startPage <= pageNumber && juzz.endPage >= pageNumber).value}`;
-        surahInfo.innerHTML = `<ul>${surahList
+        surahInfo.innerHTML = `${surahList
           .filter(surah => surah.startPage <= pageNumber && surah.endPage >= pageNumber)
           .map(surah => `<div>${surah.name}</div>`).join('')}`;
         localStorage.setItem('quranCurrentPage', pageNumber);
@@ -551,10 +551,6 @@
   
     // Initialize Analytics if supported, then expose a global tracking helper
     isSupported().then((ok) => {
-      if (!ok) {
-        console.warn("Firebase Analytics not supported in this environment (needs real browser + http/https).");
-        return;
-      }
       const analytics = getAnalytics(app);
   
       // First-load page_view
@@ -573,11 +569,9 @@
           // You can add more custom events if you like:
           // logEvent(analytics, 'quran_page_change', { page_number: pageNumber });
         } catch (e) {
-          console.warn('trackPage error:', e);
         }
       };
   
-      console.log("Analytics initialized; DebugView enabled");
     });
 </script>
 
