@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import ArrowCard from "@components/ArrowCard.astro";
+import Link from "@components/Link.astro";
+import { SITE, HOME } from "@consts";
+
+const blog = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+
+---
+
+<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+  <Container>
+    <h4 class="animate font-semibold text-black dark:text-white flex flex-row">
+      <span>
+        Hi, I'm Ean
+      </span>
+      <img src="/logo.png" alt="logo-web" height="24" width="24" class="flex" />
+    </h4>
+    <div class="space-y-16">
+      <section>
+        <article class="space-y-1">
+          <p class="animate">
+            I build frontend, backend, and occasionally marry them—then maintain
+            their ancient codebase.
+          </p>
+          <p class="animate">
+            Speak fluent .js, .go, and learning .rs (Rusty but trying).
+          </p>
+          <p class="animate">
+            Occasionally whisper to legacy code and hope it doesn't break.
+          </p>
+        </article>
+      </section>
+
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h5 class="font-semibold text-black dark:text-white">Latest posts</h5>
+          <Link href="/blog"> See all posts </Link>
+        </div>
+        <ul class="flex flex-col gap-4">
+          {
+            blog.map((post) => (
+              <li>
+                <ArrowCard entry={post} />
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+  </Container>
+</PageLayout>
